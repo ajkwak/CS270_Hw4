@@ -30,5 +30,10 @@ When /I (un)?check the following ratings: (.*)/ do |uncheck, rating_list|
   rating_list.each do |rating|
     step "I #{uncheck}check \"ratings[#{rating}]\""
   end
+end
 
+Then /I should see all of the movies/ do
+  # Nothing yet
+  rows = page.all('table#movies tr').count - 1 # must subtract 1 so omit table header row
+  rows.should == Movie.all.count
 end

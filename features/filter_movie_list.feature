@@ -23,15 +23,10 @@ Background: movies have been added to database
   
 Scenario: restrict to movies with 'PG' or 'R' ratings
   Given I am on the RottenPotatoes home page
-  
-  # enter step(s) to check the 'PG' and 'R' checkboxes
-  And I check "ratings[PG]"
-  And I check "ratings[R]"
-  
-  # enter step(s) to uncheck all other checkboxes
-  And I uncheck "ratings[G]"
-  And I uncheck "ratings[PG-13]"
-  And I uncheck "ratings[NC-17]"
+
+  # Check and uncheck the appropriate boxes
+  And I check the following ratings: PG, R
+  And I uncheck the following ratings: G, PG-13, NC-17
   
   # enter step to "submit" the search form on the homepage
   # Note: id of Refresh button is ratings_submit

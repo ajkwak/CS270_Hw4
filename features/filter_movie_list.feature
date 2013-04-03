@@ -22,10 +22,8 @@ Background: movies have been added to database
   And  I am on the RottenPotatoes home page
   
 Scenario: restrict to movies with 'PG' or 'R' ratings
-  Given I am on the RottenPotatoes home page
-
   # Check and uncheck the appropriate boxes
-  And I check the following ratings: PG, R
+  Given I check the following ratings: PG, R
   And I uncheck the following ratings: G, PG-13, NC-17
   
   # enter step to "submit" the search form on the homepage
@@ -51,8 +49,7 @@ Scenario: no ratings selected
   # Not applicable (no longer part of assignment)
 
 Scenario: all ratings selected
-  Given I am on the RottenPotatoes home page
-  And I check the following ratings: G, PG, PG-13, R, NC-17
+  Given I check the following ratings: G, PG, PG-13, R, NC-17
   And I press "Refresh"
   Then I should be on the RottenPotatoes home page
   And I should see all of the movies

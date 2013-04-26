@@ -2,6 +2,25 @@ require 'spec_helper'
 
 describe MoviesController do
 
+  describe 'New movie' do
+    it 'should show the form for creating a new movie' do
+      get :new
+      response.should render_template('new')
+    end
+  end
+
+  describe 'Create a new movie' do
+    it 'should successfully create a movie' do # no sad paths yet
+      mock_movie_id = '1'
+      mock_movie = mock('Movie', :id => mock_movie_id, :title => 'Princess Caraboo')
+
+      # Verify movie is created in the database
+      Movie.should_receive(:create!).and_return(mock_movie)
+      post :create, :movie => mock_movie
+      response.should redirect_to(movies_path)
+    end
+  end
+
   describe 'Edit existing movie' do
   	it 'should display the view for editing the existing movie\'s information' do
   		mock_movie_id = '1'
@@ -24,7 +43,6 @@ describe MoviesController do
   		put :update, :id => mock_movie_id, :movie => mock_movie
   		response.should redirect_to movie_path(mock_movie)
   	end
-  	#it 'should update the movie information with the indicated changes'
   end
 
   describe 'Search for all movies with the same director as an existing movie' do
@@ -56,4 +74,17 @@ describe MoviesController do
     end
   end
 
+  describe 'Delete an existing movie' do
+    it 'should successfully delete the movie' do
+      mock_movie_id = '1'
+      mock_movie = mock('Movie', :id => mock_movie_id, :title => 'Princess Caraboo')
+      Movie.should_receive(:find).with(mock_movie_id).and_return(mock_movie)
+      
+      # Verify that the movie's destroy method is called
+      mock_movie.should_receive(:destroy)
+
+      delete :destroy, :id => mock_movie_id
+      response.should redirect_to(movies_path)
+    end
+  end
 end

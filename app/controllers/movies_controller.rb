@@ -57,4 +57,14 @@ class MoviesController < ApplicationController
     redirect_to movies_path
   end
 
+  def search_by_director
+    @director = params["director"]
+    if @director == nil || @director == "" # if no director
+      flash[:warning] = "No director information given.  Cannot find movies with an unspecified director."
+      redirect_to movies_path
+    else
+      @movies = Movie.find_all_by_director(@director)
+    end
+  end
+
 end

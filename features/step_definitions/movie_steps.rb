@@ -6,6 +6,7 @@ Given /the following movies exist/ do |movies_table|
     # you should arrange to add that movie to the database here.
     Movie.create!(movie)
   end
+  #raise Movie.all.inspect
   assert movies_table.hashes.size == Movie.all.count
 end
 
@@ -35,4 +36,9 @@ Then /I should see all of the movies/ do
   # Nothing yet
   rows = page.all('table#movies tr').count - 1 # must subtract 1 so omit table header row
   rows.should == Movie.all.count
+end
+
+Then /the director of "(.*)" should be "(.*)"/ do |title, director|
+  step "I go to the details page for \"#{title}\""
+  step "I should see \"Director: #{director}\""
 end

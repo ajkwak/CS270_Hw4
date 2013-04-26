@@ -19,8 +19,8 @@ module NavigationHelpers
       movie_path(Movie.find_by_title($1))
     when /^the edit page for "([^"]*)"$/
       edit_movie_path(Movie.find_by_title($1))
-    when /^the Director Search page for "([^"]*)"$/
-      search_by_director_movies_path(:director => $1)
+    when /^the Similar Movies page for "([^"]*)"$/
+      search_by_director_movie_path(Movie.find_by_title($1))
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

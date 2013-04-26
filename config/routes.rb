@@ -1,6 +1,6 @@
 Rottenpotatoes::Application.routes.draw do
   resources :movies do
-  	collection do
+  	member do
   		get 'search_by_director'
   	end
   end
